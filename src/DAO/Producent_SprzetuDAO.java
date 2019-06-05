@@ -20,46 +20,42 @@ import org.hibernate.Query;
 
 public class Producent_SprzetuDAO extends HibernateUtil {
    
-   /* 
-    public List<Gatunek> getAll() {
+   
+    public List<Producent_Sprzetu> getAll() {
         
          openSessionWithTrans();
-         List<Gatunek> list = new ArrayList<Gatunek>();
+         List<Producent_Sprzetu> list = new ArrayList<Producent_Sprzetu>();
             getCurrentLocalSession().doWork((Connection connection) -> {
             CallableStatement statement = null;
              try {
-                 statement = connection.prepareCall("{call GETCAT(?)}");
+                 statement = connection.prepareCall("{call GET_PRODUCENT_SPRZETU(?)}");
                   statement.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
                     statement.execute();
                   ResultSet rs = (ResultSet)statement.getObject(1);
                    while(rs.next()){
-                Gatunek cat = new Gatunek();
-                int id_gatunku = rs.getInt("id_gatunek");
-                String gatunek_gry = rs.getString("gatunek_gry");
-                cat.setId_gatunek(id_gatunku);
-                cat.setGatunek_gry(gatunek_gry);
+                Producent_Sprzetu ps = new Producent_Sprzetu();
+                int id_prodsprzetu = rs.getInt("id_prodsprzetu");
+                String nazwa_firmy = rs.getString("nazwa_firmy");
+                ps.setId_prodsprzetu(id_prodsprzetu);
+                ps.setNazwa_firmy(nazwa_firmy);
                 
-                list.add(cat);
+                list.add(ps);
                 }
              } catch (SQLException ex) {
-                 Logger.getLogger(GatunekDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(Producent_SprzetuDAO.class.getName()).log(Level.SEVERE, null, ex);
              }
-           
-
-            
-
           }); 
         closeSessionWithTrans();
         
         return list;
          
-    };*/
+    };
     
-    public void update(Producent_Sprzetu k){
+    public void update(Producent_Sprzetu k, Producent_Sprzetu k2){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_PRODUCENT_SPRZETU(:id_prodsprzetu,:nazwa_firmy)");
-        query.setParameter("id_regiongry", k.getId_prodsprzetu());
+        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_PRODUCENT_SPRZETU(:nazwa_firmy,:nazwa_firmynew)");
         query.setParameter("nazwa_firmy", k.getNazwa_firmy());
+        query.setParameter("nazwa_firmynew", k2.getNazwa_firmy());
         query.executeUpdate();
         closeSessionWithTrans();
     };

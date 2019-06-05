@@ -51,8 +51,6 @@ public class Rodzaj_Sprzetu implements Serializable {
         this.rodzaj = rodzaj;
     }
 
-  
-
     public Rodzaj_Sprzetu(int id_rodzajsprzetu, String rodzaj) {
         this.id_rodzajsprzetu = id_rodzajsprzetu;
         this.rodzaj = rodzaj;

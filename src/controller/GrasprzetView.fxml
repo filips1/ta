@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="newPane" minHeight="333.0" minWidth="568.0" onDragDetected="#initialize" prefHeight="333.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Grasprzet_controller">
+   <children>
+      <TableView fx:id="SprzetgraTable" layoutX="209.0" layoutY="137.0" prefHeight="194.0" prefWidth="181.0">
+         <columns>
+            <TableColumn fx:id="col_id_g" prefWidth="93.0" text="ID GRY" />
+            <TableColumn fx:id="col_id_s" prefWidth="87.0" text="ID Sprzetu" />
+         </columns>
+      </TableView>
+      <Button fx:id="add_sprzetgra" layoutX="122.0" layoutY="103.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="dodaj" />
+      <Button fx:id="button1" layoutX="30.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Sprzęt" textFill="#4d08e1" underline="true">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="button2" layoutX="416.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Gra" textFill="#4d08e1" underline="true">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+      <ChoiceBox fx:id="choice_gra" layoutX="286.0" layoutY="61.0" prefHeight="25.0" prefWidth="114.0" />
+      <ChoiceBox fx:id="choice_sprzet" layoutX="153.0" layoutY="61.0" prefHeight="25.0" prefWidth="114.0" />
+      <Label layoutX="168.0" layoutY="26.0" prefHeight="25.0" prefWidth="85.0" text="ID Sprzętu" />
+      <Label layoutX="305.0" layoutY="26.0" prefHeight="25.0" prefWidth="77.0" text="ID Gry" />
+      <Button fx:id="del_sprzetgra" layoutX="214.0" layoutY="103.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="usuń" />
+      <Button fx:id="update_sprzetgra" layoutX="304.0" layoutY="103.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="update_gra" />
+      <Button fx:id="update_sprzetgra2" layoutX="395.0" layoutY="103.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="update_sprzet" />
+   </children>
+</AnchorPane>

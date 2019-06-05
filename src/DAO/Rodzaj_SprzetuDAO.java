@@ -20,46 +20,42 @@ import org.hibernate.Query;
 
 public class Rodzaj_SprzetuDAO extends HibernateUtil {
    
-   /* 
-    public List<Gatunek> getAll() {
+   
+    public List<Rodzaj_Sprzetu> getAll() {
         
          openSessionWithTrans();
-         List<Gatunek> list = new ArrayList<Gatunek>();
+         List<Rodzaj_Sprzetu> list = new ArrayList<Rodzaj_Sprzetu>();
             getCurrentLocalSession().doWork((Connection connection) -> {
             CallableStatement statement = null;
              try {
-                 statement = connection.prepareCall("{call GETCAT(?)}");
+                 statement = connection.prepareCall("{call GET_RODZAJ_SPRZETU(?)}");
                   statement.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
                     statement.execute();
                   ResultSet rs = (ResultSet)statement.getObject(1);
                    while(rs.next()){
-                Gatunek cat = new Gatunek();
-                int id_gatunku = rs.getInt("id_gatunek");
-                String gatunek_gry = rs.getString("gatunek_gry");
-                cat.setId_gatunek(id_gatunku);
-                cat.setGatunek_gry(gatunek_gry);
+                Rodzaj_Sprzetu ros = new Rodzaj_Sprzetu();
+                int id_rodzajsprzetu = rs.getInt("id_rodzajsprzetu");
+                String rodzaj = rs.getString("rodzaj");
+                ros.setId_rodzajsprzetu(id_rodzajsprzetu);
+                ros.setRodzaj(rodzaj);
                 
-                list.add(cat);
+                list.add(ros);
                 }
              } catch (SQLException ex) {
-                 Logger.getLogger(GatunekDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(Rodzaj_SprzetuDAO.class.getName()).log(Level.SEVERE, null, ex);
              }
-           
-
-            
-
           }); 
         closeSessionWithTrans();
         
         return list;
          
-    };*/
+    };
     
-    public void update(Rodzaj_Sprzetu k){
+    public void update(Rodzaj_Sprzetu k, Rodzaj_Sprzetu k2){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_RODZAJ_SPRZETU(:id_rodzajsprzetu,:rodzaj)");
-        query.setParameter("id_rodzajsprzetu", k.getId_rodzajsprzetu());
+        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_RODZAJ_SPRZETU(:rodzaj,:rodzajnew)");
         query.setParameter("rodzaj", k.getRodzaj());
+        query.setParameter("rodzajnew", k2.getRodzaj());
         query.executeUpdate();
         closeSessionWithTrans();
     };

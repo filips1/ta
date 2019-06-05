@@ -20,7 +20,7 @@ import org.hibernate.Query;
 
 public class GatunekDAO extends HibernateUtil {
    
-   /* 
+    
     public List<Gatunek> getAll() {
         
          openSessionWithTrans();
@@ -28,38 +28,34 @@ public class GatunekDAO extends HibernateUtil {
             getCurrentLocalSession().doWork((Connection connection) -> {
             CallableStatement statement = null;
              try {
-                 statement = connection.prepareCall("{call GETCAT(?)}");
+                 statement = connection.prepareCall("{call GET_GATUNEK(?)}");
                   statement.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
                     statement.execute();
                   ResultSet rs = (ResultSet)statement.getObject(1);
                    while(rs.next()){
-                Gatunek cat = new Gatunek();
+                Gatunek gat = new Gatunek();
                 int id_gatunku = rs.getInt("id_gatunek");
                 String gatunek_gry = rs.getString("gatunek_gry");
-                cat.setId_gatunek(id_gatunku);
-                cat.setGatunek_gry(gatunek_gry);
+                gat.setId_gatunek(id_gatunku);
+                gat.setGatunek_gry(gatunek_gry);
                 
-                list.add(cat);
+                list.add(gat);
                 }
              } catch (SQLException ex) {
                  Logger.getLogger(GatunekDAO.class.getName()).log(Level.SEVERE, null, ex);
              }
-           
-
-            
-
           }); 
         closeSessionWithTrans();
         
         return list;
          
-    };*/
+    };
     
-    public void update(Gatunek k){
+    public void update(Gatunek k, Gatunek k2){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_GATUNEK(:id_gatunek,:gatunek_gry)");
-        query.setParameter("id_gatunek", k.getId_gatunek());
+        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_GATUNEK(:gatunek_gry,:gatunek_grynew)");
         query.setParameter("gatunek_gry", k.getGatunek_gry());
+        query.setParameter("gatunek_grynew", k2.getGatunek_gry());
         query.executeUpdate();
         closeSessionWithTrans();
     };

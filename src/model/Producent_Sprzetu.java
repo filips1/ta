@@ -30,7 +30,6 @@ public class Producent_Sprzetu implements Serializable {
     @Column(name = "Id_ProdSprzetu", unique = true)
     private int id_prodsprzetu;
 
-
     @Column(name = "Nazwa_Firmy")
     private String nazwa_firmy;
 

@@ -5,6 +5,7 @@
  */
 package main;
 
+import DAO.HibernateUtil;
 import controller.*;
 import main.*;
 import javafx.application.Application;
@@ -26,17 +27,15 @@ public class MainApplication extends Application{
      */
     @Override
     public void start(Stage primaryStage)throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/controller/KonsoleView.fxml"));
-        Scene scene =new Scene (root,1000,1000);
-       
-        
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/controller/GrasprzetView.fxml"));
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
     public static void main(String[] args) {
-        // TODO code application logic here
+        HibernateUtil.OpenConnection();
         launch(args);
+        HibernateUtil.CloseConnection();
     }
     
 }

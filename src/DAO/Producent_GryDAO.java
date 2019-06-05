@@ -20,46 +20,42 @@ import org.hibernate.Query;
 
 public class Producent_GryDAO extends HibernateUtil {
    
-   /* 
-    public List<Gatunek> getAll() {
+   
+    public List<Producent_Gry> getAll() {
         
          openSessionWithTrans();
-         List<Gatunek> list = new ArrayList<Gatunek>();
+         List<Producent_Gry> list = new ArrayList<Producent_Gry>();
             getCurrentLocalSession().doWork((Connection connection) -> {
             CallableStatement statement = null;
              try {
-                 statement = connection.prepareCall("{call GETCAT(?)}");
+                 statement = connection.prepareCall("{call GET_PRODUCENT_GRY(?)}");
                   statement.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
                     statement.execute();
                   ResultSet rs = (ResultSet)statement.getObject(1);
                    while(rs.next()){
-                Gatunek cat = new Gatunek();
-                int id_gatunku = rs.getInt("id_gatunek");
-                String gatunek_gry = rs.getString("gatunek_gry");
-                cat.setId_gatunek(id_gatunku);
-                cat.setGatunek_gry(gatunek_gry);
+                Producent_Gry pg = new Producent_Gry();
+                int id_prodgry = rs.getInt("id_prodgry");
+                String nazwa_firmy = rs.getString("nazwa_firmy");
+                pg.setId_prodgry(id_prodgry);
+                pg.setNazwa_firmy(nazwa_firmy);
                 
-                list.add(cat);
+                list.add(pg);
                 }
              } catch (SQLException ex) {
-                 Logger.getLogger(GatunekDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(Producent_GryDAO.class.getName()).log(Level.SEVERE, null, ex);
              }
-           
-
-            
-
           }); 
         closeSessionWithTrans();
         
         return list;
          
-    };*/
+    };
     
-    public void update(Producent_Gry k){
+    public void update(Producent_Gry k, Producent_Gry k2){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_PRODUCENT_GRY(:id_prodgry,:nazwa_firmy)");
-        query.setParameter("id_regiongry", k.getId_prodgry());
+        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_PRODUCENT_GRY(:nazwa_firmy,:nazwa_firmynew)");
         query.setParameter("nazwa_firmy", k.getNazwa_firmy());
+        query.setParameter("nazwa_firmynew", k2.getNazwa_firmy());
         query.executeUpdate();
         closeSessionWithTrans();
     };

@@ -29,7 +29,18 @@ public class Gra implements Serializable {
     @SequenceGenerator(name = "SEQUENCE_NAME", sequenceName = "SEQUENCE_NAME", allocationSize = 1, initialValue = 1)
     @Column(name = "Id_Gra", unique = true)
     private int id_gra;
-
+    
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Region_Gry id_regiongry;
+    
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Producent_Gry id_prodgry;
+    
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Gatunek id_gatunek;
 
     @Column(name = "Nazwa_Gry")
     private String nazwa_gry;
@@ -55,6 +66,30 @@ public class Gra implements Serializable {
 
     public void setId_gra(int id_gra) {
         this.id_gra = id_gra;
+    }
+
+    public Region_Gry getId_regiongry() {
+        return id_regiongry;
+    }
+
+    public void setId_regiongry(Region_Gry id_regiongry) {
+        this.id_regiongry = id_regiongry;
+    }
+
+    public Producent_Gry getId_prodgry() {
+        return id_prodgry;
+    }
+
+    public void setId_prodgry(Producent_Gry id_prodgry) {
+        this.id_prodgry = id_prodgry;
+    }
+
+    public Gatunek getId_gatunek() {
+        return id_gatunek;
+    }
+
+    public void setId_gatunek(Gatunek id_gatunek) {
+        this.id_gatunek = id_gatunek;
     }
 
     public String getNazwa_gry() {
@@ -105,8 +140,11 @@ public class Gra implements Serializable {
         return opis;
     }
 
-    public Gra(int id_gra, String nazwa_gry, int cena_nowej_gry, int rok_produkcji, int cena_pelna, int cena_samej_gry, String opis) {
+    public Gra(int id_gra, Region_Gry id_regiongry, Producent_Gry id_prodgry, Gatunek id_gatunek, String nazwa_gry, int cena_nowej_gry, int rok_produkcji, int cena_pelna, int cena_samej_gry, String opis) {
         this.id_gra = id_gra;
+        this.id_regiongry = id_regiongry;
+        this.id_prodgry = id_prodgry;
+        this.id_gatunek = id_gatunek;
         this.nazwa_gry = nazwa_gry;
         this.cena_nowej_gry = cena_nowej_gry;
         this.rok_produkcji = rok_produkcji;

@@ -20,46 +20,42 @@ import org.hibernate.Query;
 
 public class Region_GryDAO extends HibernateUtil {
    
-   /* 
-    public List<Gatunek> getAll() {
+   
+    public List<Region_Gry> getAll() {
         
          openSessionWithTrans();
-         List<Gatunek> list = new ArrayList<Gatunek>();
+         List<Region_Gry> list = new ArrayList<Region_Gry>();
             getCurrentLocalSession().doWork((Connection connection) -> {
             CallableStatement statement = null;
              try {
-                 statement = connection.prepareCall("{call GETCAT(?)}");
+                 statement = connection.prepareCall("{call GET_REGION_GRY(?)}");
                   statement.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
                     statement.execute();
                   ResultSet rs = (ResultSet)statement.getObject(1);
                    while(rs.next()){
-                Gatunek cat = new Gatunek();
-                int id_gatunku = rs.getInt("id_gatunek");
-                String gatunek_gry = rs.getString("gatunek_gry");
-                cat.setId_gatunek(id_gatunku);
-                cat.setGatunek_gry(gatunek_gry);
+                Region_Gry rg = new Region_Gry();
+                int id_regiongry = rs.getInt("id_regiongry");
+                String region = rs.getString("region");
+                rg.setId_regiongry(id_regiongry);
+                rg.setRegion(region);
                 
-                list.add(cat);
+                list.add(rg);
                 }
              } catch (SQLException ex) {
-                 Logger.getLogger(GatunekDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(Region_GryDAO.class.getName()).log(Level.SEVERE, null, ex);
              }
-           
-
-            
-
           }); 
         closeSessionWithTrans();
         
         return list;
          
-    };*/
+    };
     
-    public void update(Region_Gry k){
+    public void update(Region_Gry k, Region_Gry k2){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_REGION_GRY(:id_regiongry,:region)");
-        query.setParameter("id_regiongry", k.getId_regiongry());
+        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_REGION_GRY(:region,:regionnew)");
         query.setParameter("region", k.getRegion());
+        query.setParameter("regionnew", k2.getRegion());
         query.executeUpdate();
         closeSessionWithTrans();
     };

@@ -51,8 +51,6 @@ public class Region_Sprzetu implements Serializable {
         this.region = region;
     }
 
-  
-
     public Region_Sprzetu(int id_regionsprzetu, String region) {
         this.id_regionsprzetu = id_regionsprzetu;
         this.region = region;

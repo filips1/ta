@@ -29,10 +29,18 @@ public class Sprzet implements Serializable {
     @SequenceGenerator(name = "SEQUENCE_NAME", sequenceName = "SEQUENCE_NAME", allocationSize = 1, initialValue = 1)
     @Column(name = "id_sprzet", unique = true)
     private int id_sprzet;
+    
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Region_Sprzetu id_regionsprzetu;
+    
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Producent_Sprzetu id_prodsprzetu;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Gra gra;
+    private Rodzaj_Sprzetu id_rodzajsprzetu;
 
     @Column(name = "Nazwa")
     private String nazwa;
@@ -58,6 +66,30 @@ public class Sprzet implements Serializable {
 
     public void setId_sprzet(int id_sprzet) {
         this.id_sprzet = id_sprzet;
+    }
+
+    public Region_Sprzetu getId_regionsprzetu() {
+        return id_regionsprzetu;
+    }
+
+    public void setId_regionsprzetu(Region_Sprzetu id_regionsprzetu) {
+        this.id_regionsprzetu = id_regionsprzetu;
+    }
+
+    public Producent_Sprzetu getId_prodsprzetu() {
+        return id_prodsprzetu;
+    }
+
+    public void setId_prodsprzetu(Producent_Sprzetu id_prodsprzetu) {
+        this.id_prodsprzetu = id_prodsprzetu;
+    }
+
+    public Rodzaj_Sprzetu getId_rodzajsprzetu() {
+        return id_rodzajsprzetu;
+    }
+
+    public void setId_rodzajsprzetu(Rodzaj_Sprzetu id_rodzajsprzetu) {
+        this.id_rodzajsprzetu = id_rodzajsprzetu;
     }
 
     public String getNazwa() {
@@ -108,14 +140,21 @@ public class Sprzet implements Serializable {
         return specyfikacja;
     }
 
-    public Sprzet(int id_sprzetu, String nazwa, int cena, int rok_poczatku_produkcji, int rok_zakonczenia_produkcji, int generacja, String specyfikacja) {
+    public Sprzet(int id_sprzet, Region_Sprzetu id_regionsprzetu, Producent_Sprzetu id_prodsprzetu, Rodzaj_Sprzetu id_rodzajsprzetu, String nazwa, int cena, int rok_poczatku_produkcji, int rok_zakonczenia_produkcji, int generacja, String specyfikacja) {
         this.id_sprzet = id_sprzet;
+        this.id_regionsprzetu = id_regionsprzetu;
+        this.id_prodsprzetu = id_prodsprzetu;
+        this.id_rodzajsprzetu = id_rodzajsprzetu;
         this.nazwa = nazwa;
         this.cena = cena;
         this.rok_poczatku_produkcji = rok_poczatku_produkcji;
         this.rok_zakonczenia_produkcji = rok_zakonczenia_produkcji;
         this.generacja = generacja;
         this.specyfikacja = specyfikacja;
+    }
+    
+    public Sprzet(int id_sprzet){
+        this.id_sprzet = id_sprzet;
     }
 
     public Sprzet() {

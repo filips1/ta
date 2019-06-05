@@ -51,8 +51,6 @@ public class Gatunek implements Serializable {
         this.gatunek_gry = gatunek_gry;
     }
 
-  
-
     public Gatunek(int id_gatunek, String gatunek_gry) {
         this.id_gatunek = id_gatunek;
         this.gatunek_gry = gatunek_gry;

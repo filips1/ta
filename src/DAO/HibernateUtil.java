@@ -9,6 +9,7 @@ import model.Gra;
 import model.Gatunek;
 import model.Sprzet;
 import model.Producent_Sprzetu;
+import model.Producent_Gry;
 import model.Region_Gry;
 import model.Region_Sprzetu;
 import model.Rodzaj_Sprzetu;
@@ -21,12 +22,6 @@ import static org.hibernate.boot.registry.StandardServiceRegistryBuilder.destroy
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-/**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
- *
- * @author Arlen
- */
 public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
@@ -35,10 +30,9 @@ public class HibernateUtil {
     private static Transaction transact;
     private static Configuration config;
     
-    
     public static void StartSessionFactory(){
        try {
-            config = new Configuration().configure("/HibernateConfigXML/hibernate.cfg.xml");
+            config = new Configuration().configure("/config/hibernate.cfg.xml");
                           config.addAnnotatedClass(Gra.class);
                           config.addAnnotatedClass(Gatunek.class);
                           config.addAnnotatedClass(Producent_Sprzetu.class);
@@ -47,7 +41,7 @@ public class HibernateUtil {
                           config.addAnnotatedClass(Rodzaj_Sprzetu.class);
                           config.addAnnotatedClass(Sprzet.class);
                           config.addAnnotatedClass(Producent_Gry.class);
-
+                          
 
 
             registry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
@@ -55,8 +49,7 @@ public class HibernateUtil {
             sessionFactory = config.buildSessionFactory(registry);
         }   
         catch (HibernateException ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            System.err.println("Blad podczas tworzenia sesji." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

@@ -20,52 +20,48 @@ import org.hibernate.Query;
 
 public class Region_SprzetuDAO extends HibernateUtil {
    
-   /* 
-    public List<Gatunek> getAll() {
+   
+    public List<Region_Sprzetu> getAll() {
         
          openSessionWithTrans();
-         List<Gatunek> list = new ArrayList<Gatunek>();
+         List<Region_Sprzetu> list = new ArrayList<Region_Sprzetu>();
             getCurrentLocalSession().doWork((Connection connection) -> {
             CallableStatement statement = null;
              try {
-                 statement = connection.prepareCall("{call GETCAT(?)}");
+                 statement = connection.prepareCall("{call GET_REGION_SPRZETU(?)}");
                   statement.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
                     statement.execute();
                   ResultSet rs = (ResultSet)statement.getObject(1);
                    while(rs.next()){
-                Gatunek cat = new Gatunek();
-                int id_gatunku = rs.getInt("id_gatunek");
-                String gatunek_gry = rs.getString("gatunek_gry");
-                cat.setId_gatunek(id_gatunku);
-                cat.setGatunek_gry(gatunek_gry);
+                Region_Sprzetu res = new Region_Sprzetu();
+                int id_regionsprzetu = rs.getInt("id_regionsprzetu");
+                String region = rs.getString("region");
+                res.setId_regionsprzetu(id_regionsprzetu);
+                res.setRegion(region);
                 
-                list.add(cat);
+                list.add(res);
                 }
              } catch (SQLException ex) {
-                 Logger.getLogger(GatunekDAO.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(Region_SprzetuDAO.class.getName()).log(Level.SEVERE, null, ex);
              }
-           
-
-            
-
           }); 
         closeSessionWithTrans();
         
         return list;
          
-    };*/
+    };
     
-    public void update(Region_Sprzetu k){
+    public void update(Region_Sprzetu k,Region_Sprzetu k2){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_REGION_SPRZETU(:id_regionsprzetu,:region)");
-        query.setParameter("id_regionsprzetu", k.getId_regionsprzetu());
+        Query query = getCurrentLocalSession().createSQLQuery("call UPDATE_REGION_SPRZETU(:region,:regionnew)");
         query.setParameter("region", k.getRegion());
+        query.setParameter("regionnew", k2.getRegion());
         query.executeUpdate();
         closeSessionWithTrans();
     };
     public void delete(Region_Sprzetu k){
         openSessionWithTrans();
-        Query query = getCurrentLocalSession().createSQLQuery("call DELETE_REGION_SPRZETU(:regions)").setParameter("region", k.getRegion());
+        Query query = getCurrentLocalSession().createSQLQuery("call DELETE_REGION_SPRZETU(:region)").setParameter("region", k.getRegion());
         query.executeUpdate();
         closeSessionWithTrans();
     };
